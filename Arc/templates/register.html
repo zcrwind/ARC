@@ -1,0 +1,84 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="{% static 'img/yumaoicon.png' %}">
+		<title>注册ARC</title>
+
+		<!-- Bootstrap -->
+		<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+        <link href="{% static 'css/__zcrMain.css' %}" rel="stylesheet"><!-- 自定义less文件编译之后生成的css文件 -->
+        <link href="{% static 'css/zcrMain.css' %}" rel="stylesheet"><!-- zcr写CSS的地方 -->
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="js/html5shiv.min.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body id="register-page">
+		<div class="container main">
+        <div class="col-md-6 col-md-offset-3">
+            <h2 class="text-center"> 欢迎注册ARC</h2>
+            <form id="register-form" action="register.html" method="post">
+                {% if error %}
+                <div class="form-group">
+                    <p>{{ error }}</p>
+                </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="nickname"> 昵称</label>
+                    <input type="nickname" class="form-control input" id="nickname" name="nickname" placeholder="用户名" data-remote="/api/username_check/" data-remote-error="该用户名已被注册！" data-error="请填写用户名" required autofocus>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <!--<label for="sno">学号</label>-->
+                    <input type="text" class="form-control input" name="sno" placeholder="必填">
+                </div>
+                <div class="form-group">
+                    <label for="sex">性别</label>&nbsp;&nbsp;
+                    <input type="radio" id="sex" name="sex" value="男" placeholder="必填" required>男&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="sex" value="女" placeholder="必填" required>女
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱地址</label>
+                    <input type="email" class="form-control input" id="email" name="email" placeholder="邮箱地址" data-remote="/api/email_check/" data-remote-error="该邮箱已被注册！" data-error="请填写正确的邮箱地址" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="dept">学院</label>
+                    <input type="dept" class="form-control input" id="dept" name="dept" placeholder="院系" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">联系电话</label>
+                    <input type="phone" class="form-control input" id="phone" name="phone" placeholder="联系电话" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="passwd">密码</label>
+                    <input type="password" class="form-control input" id="passwd" name="passwd" data-error="请填写密码" placeholder="密码" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="rpasswd">确认密码</label>
+                    <input type="password" class="form-control input" id="rpasswd" name="rpasswd"
+                           placeholder="确认密码" data-match="#password" data-match-error="两个密码不一致" data-error="请填写确认密码" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="{% static 'js/jquery-3.1.0.js' %}"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+	</body>
+</html>

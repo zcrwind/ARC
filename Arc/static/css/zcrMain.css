@@ -1,0 +1,350 @@
+/*zcr自己写CSS的地方*/
+/*.navbar {
+	height: 60px;
+}*/
+body {
+	padding-top: 60px;
+	padding-bottom: 20px;
+	font-family: Verdana,Arial,'Microsoft YaHei',sans-serif;
+}
+.navbar {
+	font-size: 18px;
+}
+.carousel {
+	height: 400px;
+	background-color: #000;
+	margin-bottom: 40px;
+}
+.carousel .item {
+	height: 400px;
+	background-color: #000;
+}
+.carousel img {
+	width: 100%;
+}
+.carousel-caption p {
+	font-size: 20px;
+	line-height: 1.8;
+}
+/*.carousel-caption h3 {
+	font-size: 25px;
+}*/
+#summary-container {
+	text-align: center;
+}
+/*下面对hr的样式设置没有起作用...Why*/
+/*hr.divider {
+	color: red;
+}*/
+
+/*h1 {
+	font-family: 'YouYuan';
+}*/
+
+nav .portrait img {
+	margin-top: 6px;
+	width: 50px;
+	height: 50px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%;/*制造出圆形头像效果*/
+	border: 3px solid #fff;
+}
+/*---------------功能页样式----------------*/
+#summary-container {
+	margin-bottom: 80px;
+}
+#summary-container p {
+	font-size: 18px;
+	line-height: 1.6;
+}
+#summary-container .tabList {
+	margin-top: 25px;
+}
+#summary-container .row .col-md-4 {
+	margin-bottom: 30px;
+}
+.details-info {
+	margin-top: 40px;
+	background-color: #5c307d;
+	color: #fff;
+	padding: 60px 0px;
+	background-image: url(../img/footer-banner.png);
+	background-repeat: repeat-x;
+	/*background-position: 0 486px;*/
+	background-position: center bottom;/*比上面的方法优秀得多*/
+}
+.card-group {
+	padding: 0px;
+}
+.card {
+	padding: 30px;
+	/*margin: 5px;*/
+}
+.card p {
+	font-size: 17px;
+	letter-spacing: 1px;
+}
+.card-group #card1 {
+	background: rgba(0,0,0,0.04);
+}
+.card-group #card2 {
+	background: rgba(0,0,0,0.08);
+}
+.card-group #card3 {
+	background: rgba(0,0,0,0.12);
+}
+.card-group #card4 {
+	background: rgba(0,0,0,0.16);
+}
+.navbar-fixed-top .login{
+	color: #ccc;
+	padding: 9px 30px;
+	margin: 12px 0 0 0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 22px;
+	border: #fff 1px solid;
+	/*background: #458b00;*/
+	display: inline-block;
+}
+.navbar-fixed-top ul.navbar-right a.login:hover {
+	background: #458b00;
+	color: #fff;
+}
+
+#functionPage .tabList .portrait {
+	padding: 20px 65px;
+	/*background-color: #ddd;*/
+	/*background: rgba(0,0,0,0.14);*/
+
+}
+#functionPage .tabList .portrait img {
+	width: 170px;
+	height: 170px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%;/*制造出圆形头像效果*/
+	border: 6px solid #fff;
+}
+#functionPage .tabList #group {
+	padding: 20px 50px
+}
+#functionPage .tabList #group .authorinfo .learnmore {
+	margin-top: 20px;
+}
+/*#functionPage .tabList .author1 {
+	margin: 10px 5px 10px 30px;
+}
+#functionPage .tabList .author2 {
+	margin: 10px 30px 10px 5px;
+}*/
+#functionPage .tabList #technology .thumbnail {
+	min-height: 210px;
+}
+#functionPage .tabList #technology .thumbnail img {
+	vertical-align: center;
+}
+/*#functionPage .container {
+	margin-bottom: 10px;
+}*/
+
+/*---------------首页样式(add on 2016.11.13)(在测试Django之后加的，需要导到Django项目里)----------------*/
+
+#homepage h1 {
+	margin-top: 10px;
+}
+
+/*---------------登录页样式----------------*/
+#login-page {
+	background: url(../img/login_bg.jpg) no-repeat;
+	background-size: cover;
+}
+#login-page .container {
+	background: rgba(0,0,0,0.36);
+	padding: 50px 0 100px 0;
+	margin-top: 80px;
+	color: #fff;
+	font-size: 22px;
+	/*width: 780px;*/
+}
+#login-page .container h2 {
+	font-size: 35px;
+	/*font-family: 'YouYuan';*/
+}
+/*#login-register-page .container button {
+	font-size: 20px;
+	padding: 9px 30px;
+	margin: 6px 0 0 0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 22px;
+}*/
+#login-page .container button {
+	font-size: 20px;
+}
+
+#register-page {
+	background: url(../img/13799254473885.jpg) no-repeat;
+	background-size: cover;
+}
+#register-page .container {
+	background: rgba(0,0,0,0.36);
+	padding: 25px 0 10px 0;
+	margin-top: 0px;
+	color: #fff;
+	font-size: 15px;
+	width: 880px;
+}
+
+/*---------------管理页样式----------------*/
+/*左侧导航栏*/
+#managepage .sidebar {
+            position: fixed;
+            top: 51px;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            display: block;
+            padding: 20px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-color: #f1e6e6;
+            border-right: 1px solid #eee;
+            width: 225px;
+}
+
+/*右侧可隐藏导航栏*/
+#managepage #overlay-sidebar {
+	/*display: none;*/
+	position: fixed;
+	top: 0px;
+	right: -300px;/*侧栏宽度的负值，起到隐藏的作用*/
+	bottom: 0px;
+	width: 300px;
+	background: #333;
+	padding: 26px 0px;
+	z-index: 9999;/*比下面的overlay的大*/
+}
+#managepage #overlay-sidebar ul {
+	padding: 0px;
+}
+#managepage #overlay-sidebar ul li {
+	list-style: none;
+}
+#managepage #overlay-sidebar ul li a {
+	color: #fff;
+	display: inline-block;
+	padding: 10px 32px;
+	width: 100%;
+}
+#managepage #overlay-sidebar ul li a:hover {
+	background: #555;
+	text-decoration: none;
+}
+#managepage #overlay-sidebar .portrait {/*肖像*/
+	padding: 20px 65px;
+}
+#managepage #overlay-sidebar .portrait img {
+	width: 170px;
+	height: 170px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%;/*制造出圆形头像效果*/
+	border: 6px solid #fff;
+}
+
+/*----------overlay遮罩整个页面，在侧栏出现的时候造出一种正文内容整体变暗的效果---------*/
+#overlay {
+	display: none;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	z-index: 9998;
+	/*在html中，#overlay是在sidebar之前写的，故它位于sidebar的下面，不会将sidebar
+	 *遮住，但如果设置#overlay的z-index为很大(例如999)，就会将侧栏也遮住，这不是我们想要的。
+	 *也可以对#overlay设置998，对sidebar设置999
+	 */
+	background: rgba(0,0,0,0.36);
+}
+
+button#back-to-top {
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	/*border: solid 1px #eee;*/
+	background: rgba(7,72,130,0.6);
+}
+
+#managepage .main {
+	padding-right: 20px;
+}
+#managepage .tab-pane {
+	/*background-color: red;*/
+	margin-top: 20px;
+	padding: 5px 10px;
+}
+#managepage #shopping-cart img {
+	height: 85px;
+	width: 85px;
+	background-color: green;
+}
+#managepage #shopping-cart table td {
+	height: 90px;
+	line-height: 90px;
+	text-align: center;
+}
+#managepage #shopping-cart table th {
+	height: 14px;
+	line-height: 14px;
+	text-align: center;
+}
+#managepage #profile img {
+	width: 200px;
+	height: 200px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%;/*制造出圆形头像效果*/
+	/*border: 6px solid #444;*/
+}
+#managepage #upload .upload-form .panel {
+	padding: 40px 40px 20px 40px;
+	/*background-color: red;*/
+}
+#managepage #upload .upload-form .panel .addimage {
+	background-color: red;
+	color: #fff;
+	padding: 10px 16px;
+	/*border: 2px solid #000;*/
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 22px;
+	background: #458b00;
+	display: inline-block;
+}
+
+/*---------------书籍详细信息页样式----------------*/
+
+#detailInfoPage .book img {
+	height: 400px;
+	width: 380px;
+}
+#detailInfoPage #buy-or-add {
+	margin: 20px;
+	padding: 0 110px;
+	/*background-color: red;*/
+}
+#detailInfoPage #buy-or-add a {
+	padding-left: 20px;
+	padding-right: 20px;
+	margin: 20px;
+}

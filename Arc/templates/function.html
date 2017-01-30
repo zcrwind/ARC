@@ -1,0 +1,412 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>功能说明</title>
+
+    <link rel="icon" href="{% static 'img/yumaoicon.png' %}">
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/__zcrMain.css' %}" rel="stylesheet"><!-- 自定义less文件编译之后生成的css文件 -->
+    <link href="{% static 'css/zcrMain.css' %}" rel="stylesheet"><!-- zcr写CSS的地方 -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="functionPage">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation"><!-- 顶部导航条 -->
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">
+                <img alt="Brand" src="{% static 'img/catlogo.png' %}" width="111px">
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- <a class="navbar-brand" href="index.html">DB Project</a> -->
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html"><span class="icon fa fa-home"></span> 首页</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="icon fa fa-group"></span>
+                        团队
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#feature-tab" data-tab="tab-chrome">Paradox</a></li>
+                        <li><a href="#group">Cherrywind</a></li>
+                    </ul>
+                </li>
+                <li class="active"><a href="#"><span class="icon fa fa-envira"></span> 功能</a></li>
+                {% if authen %}
+                <li><a href="manage.html"><span class="icon fa fa-wrench"></span> 管理</a></li>
+                {% endif %}
+                <li><a href="#aboutModal" data-toggle="modal" data-target="#aboutModal"><span
+                        class="icon fa fa-comments"></span> 关于</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if authen %}
+                <li>
+                    <a href="manage.html#shopping-cart"><span class="icon fa fa-shopping-cart"></span> 购物车</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="#pleaselogin" data-toggle="modal" data-target="#pleaselogin"><span
+                            class="icon fa fa-shopping-cart"></span> 购物车</a>
+                </li>
+                {% endif %}
+                <li>
+                    {% if authen %}
+                <li>
+                    <div class="portrait"><!-- 头像 -->
+                        <img src="{% static 'img/zcrPortrait.png' %}" alt="晨风睿思头像">
+                    </div>
+                </li>
+                <li><a href="logout.html">退出</a></li>
+                {% else %}
+                <li>
+                    <a href="login.html" class="login">登录 | 注册</a>
+                </li>
+                {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav><!-- 顶部导航条 -->
+
+<div id="homepage-feature" class="carousel slide" data-ride="carousel"><!-- 轮播 -->
+    <ol class="carousel-indicators"><!-- 进度指示器 -->
+        <li data-target="#homepage-feature" data-slide-to="0" class="active"></li>
+        <li data-target="#homepage-feature" data-slide-to="1"></li>
+        <li data-target="#homepage-feature" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="{% static 'img/crazy-animals.jpg' %}" alt="animals">
+            <div class="carousel-caption">
+                <h3>ARC 校园旧书交易系统</h3>
+                <p>Talk is cheap,show us the book.</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="{% static 'img/girl.jpg' %}" alt="girl">
+            <div class="carousel-caption">
+                <h3>NPUer &middot; 专属</h3>
+                <p>我们将思索汇聚指尖，与你在云端相遇</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="{% static 'img/big_house.jpg' %}" alt="green">
+            <div class="carousel-caption">
+                <h3>数据库</h3>
+                <p>Database is the core of the project</p>
+            </div>
+        </div>
+    </div>
+    <!-- Controls -->
+    <a class="left carousel-control" href="#homepage-feature" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#homepage-feature" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div><!-- 轮播 -->
+
+<div class="container" id="summary-container">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{% static 'img/database.png' %}" alt="Database">
+            <h3>数据库</h3>
+            <p>数据库为该项目的核心。我们使用<br>MySQL，加入了数据库访问的安全机制</p>
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'img/code.png' %}" alt="Language">
+            <h3>编程语言</h3>
+            <p>
+                使用的编程语言：Python、LESS、JavaScript、HTML<br>
+                Web框架：采用Django
+            </p>
+        </div>
+        <div class="col-md-4">
+            <!-- <img src="img/book.png" alt="book"> -->
+            <img src="{% static 'img/respond.png' %}" alt="响应式">
+            <h3>响应式</h3>
+            <p>
+                支持PC，以及Pad、手机等移动端<br>
+                PC浏览器推荐<a href="http://www.google.cn/chrome/browser/desktop/index.html">Chrome</a>、<a
+                    href="http://www.firefox.com.cn/">Firefox</a>、<br><a
+                    href="http://www.apple.com/cn/safari/">Safari</a>、<a href="http://www.opera.com/zh-cn">Opera</a>、IE9+
+            </p>
+        </div>
+    </div>
+    <!-- <hr class="divider"> -->
+    <div class="tabList">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#abstract" role="tab" data-toggle="tab">项目简介</a></li>
+            <!-- <li role="presentation"><a href="#guide" role="tab" data-toggle="tab">使用方法</a></li> -->
+            <li role="presentation"><a href="#group" role="tab" data-toggle="tab">团队</a></li>
+            <li role="presentation"><a href="#technology" role="tab" data-toggle="tab">用到的技术</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="abstract">
+                <h3>NPUer专属旧书交易平台</h3>
+                <h5>我们将思索汇聚指尖，与你在云端相遇</h5>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{% static 'img/Hot_Filter_Feather.png' %}" alt="">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">这是我们的数据库大作业</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p style="text-align: left">
+                                    鉴于工大校园中每年都有大量的旧书被当废纸处理掉，而又有好多同学由于课程需要，到北门外的旧书店去购买，浪费了很多资源。<br>
+                                    其实...我们可以有自己的旧书交易系统！
+                                    只要简单注册一个账号，就可以淘到自己需要的好书~<br>
+                                    种类齐全，教科书、课外书...计算机相关、文学、哲学、美学...应有尽有！不要再犹豫，赶快来体验吧!
+                                </p>
+                            </div>
+                            <div class="panel-footer">2016</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="tab-pane" id="guide">
+                <h3>Help信息</h3>
+            </div> -->
+            <div class="tab-pane" id="group">
+                <h3>我们的团队</h3>
+                <p>
+                    来自计算机学院10011407班的 苏斌 和 张晨睿。我们崇(xi)尚(huan)实(zhe)战(teng)
+                </p>
+                <div class="row">
+                    <div class="col-md-6 author1">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <div class="portrait">
+                                        <img src="{% static 'img/zcrPortrait.png' %}" alt="张晨睿">
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="authorinfo">
+                                    <h4>张晨睿</h4>
+                                    <p>
+                                        计算机学院10011407班
+                                    </p>
+                                    <p>
+                                        热爱前端开发。喜欢HTML、CSS、JavaScript、Node.js、Python、Bootstrap、Less、JQuery等技术。
+                                    </p>
+                                    <p style="text-align: left">项目贡献度：</p>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-info progress-bar-striped"
+                                             role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+                                             style="width: 50%">
+                                            <span class="sr-only">50% Complete</span>50%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <p class="learnmore">
+                                    <a href="#" class="btn btn-primary">查看团队资料 <span
+                                            class="icon fa fa-arrow-circle-right"></span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 author2">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <div class="portrait">
+                                        <img src="{% static 'img/subinPortrait.png' %}" alt="苏斌">
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="authorinfo">
+                                    <h4>苏斌</h4>
+                                    <p>
+                                        计算机学院10011407班
+                                    </p>
+                                    <p>
+                                        热爱技术，喜欢钻研。喜欢新奇的事物，对研究感兴趣，喜欢动手，希望自己能有所创造。
+                                    </p>
+                                    <p style="text-align: left">项目贡献度：</p>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-info progress-bar-striped"
+                                             role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+                                             style="width: 50%">
+                                            <span class="sr-only">50% Complete</span>50%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <p class="learnmore">
+                                    <a href="#" class="btn btn-primary">查看团队资料 <span
+                                            class="icon fa fa-arrow-circle-right"></span></a>
+                                </p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane" id="technology">
+                <h3>我们用到的技术</h3>
+                <div class="row">
+                    <div class="col-xs-6 col-md-4">
+                        <a href="#" class="thumbnail">
+                            <img src="{% static 'img/technology/django-logo-positive.png' %}" alt="...">
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a href="#" class="thumbnail">
+                            <img src="{% static 'img/technology/mysql.jpg' %}" alt="...">
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a href="#" class="thumbnail">
+                            <img src="{% static 'img/technology/pic_html5.gif' %}" alt="...">
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a href="#" class="thumbnail">
+                            <img src="{% static 'img/technology/python.jpg' %}" alt="...">
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a href="#" class="thumbnail">
+                            <img src="{% static 'img/technology/sass-less.png' %}" alt="...">
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a href="#" class="thumbnail">
+                            <img src="{% static 'img/technology/bs.png' %}" alt="...">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="details-info">
+    <div class="container card-container">
+        <div class="row">
+            <div class="col-sm-6 card-group">
+                <article class="card" id="card1">
+                    <h3><span class="icon fa fa-book"></span> 主要功能</h3>
+                    <p>
+                        我们专注于校园二手书交易。
+                        我们支持：书籍查询、发布出售书籍信息、发布求购书籍信息以及用户基本信息管理、实时更新书籍交易记录等核心功能。<br>
+                        我们将思索汇聚指尖，与你在云端相遇。希望本系统可以为更多的NPUer带来学习上的便利。<span class="icon fa fa-smile-o"></span>
+                    </p>
+                </article>
+                <article class="card" id="card3">
+                    <h3><span class="icon fa fa-envira"></span> 实践记录</h3>
+                    <p>
+                        在初步设计好数据库中的各个表之后，我们经过了多次优化，消除了各个表中的非主属性对码的部分函数依赖、传递函数依赖，以及主属性对码的部分函数依赖和传递函数依赖，达到了函数依赖范围内的彻底分离——BCNF。<br>使用了存储过程、触发器、函数，对数据库查询进行了优化。
+                    </p>
+                </article>
+            </div>
+            <div class="col-sm-6 card-group">
+                <article class="card" id="card2">
+                    <h3><span class="icon fa fa-database"></span> 数据库</h3>
+                    <p>
+                        我们使用开源关系型数据库MySQL，不同于SQLite，这是一个真正的服务器数据库。<br>
+                        我们将主要精力集中在数据库的设计及安全方面。经过多次修正，构建的数据库模式符合BCNF，通过Hash等加密算法提升系统的安全性。
+                    </p>
+                </article>
+                <article class="card" id="card4">
+                    <h3><span class="icon fa fa-envira"></span> 存在的不足</h3>
+                    <p>
+                        由于做大作业的过程中，同时要准备多门考试的复习，所以只能采用每天抽出一点时间的方法来做，做了一些重复的工作。此外，由于初学Django框架，故在一些程序实现中，并没有采用最优雅的编程实践。<br>
+                        对于一些扩展的模块，还有待完善，以使其更加健壮。
+                    </p>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer role="contentinfo">
+    <ul class="social">
+        <li><a href="#" title="QQ"><span class="icon fa fa-qq"></span></a></li>
+        <li><a href="#" title="微信"><span class="icon fa fa-weixin"></span></a></li>
+        <li><a href="#" title="微博"><span class="icon fa fa-weibo"></span></a></li>
+        <li><a href="#" title="Github"><span class="icon fa fa-github-alt"></span></a></li>
+    </ul>
+    <div class="copy">
+        <p>CopyRight &copy 2016</p>
+        <p>西北工业大学 ARC</p>
+    </div>
+</footer>
+<div class="modal fade" id="aboutModal"><!-- "关于"模态框 -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">关于此交易系统</h4>
+            </div>
+            <div class="modal-body">
+                <p>这是我们的数据库大作业&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">我知道了</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="pleaselogin"><!-- "关于"模态框 -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">请先登录！</h4>
+            </div>
+            <div class="modal-body">
+                <p>转到<a href="login.html">登录页</a></p>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">暂不跳转</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'js/jquery-3.1.0.js' %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

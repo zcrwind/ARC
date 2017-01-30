@@ -1,0 +1,460 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>ARC校园旧书交易系统</title>
+    <link rel="icon" href="{% static 'img/yumaoicon.png' %}">
+
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/__zcrMain.css' %}" rel="stylesheet"><!-- 自定义less文件编译之后生成的css文件 -->
+    <link href="{% static 'css/zcrMain.css' %}" rel="stylesheet"><!-- zcr写CSS的地方 -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="managepage">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation"><!-- 顶部导航条 -->
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">
+                <img alt="Brand" src="{% static 'img/catlogo.png' %}" width="111px">
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- <a class="navbar-brand" href="index.html">DB Project</a> -->
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html"><span class="icon fa fa-home"></span> 首页</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="icon fa fa-group"></span>
+                        团队
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#feature-tab" data-tab="tab-chrome">Paradox</a></li>
+                        <li><a href="#group">Cherrywind</a></li>
+                    </ul>
+                </li>
+                <li><a href="function.html"><span class="icon fa fa-envira"></span> 功能</a></li>
+                <li class="active"><a href="manage.html"><span class="icon fa fa-wrench"></span> 管理</a></li>
+                <li><a href="#aboutModal" data-toggle="modal" data-target="#aboutModal"><span
+                        class="icon fa fa-comments"></span> 关于</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if authen %}
+                <li>
+                    <a href="manage.html#shopping-cart"><span class="icon fa fa-shopping-cart"></span> 购物车</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="#pleaselogin" data-toggle="modal" data-target="#pleaselogin"><span
+                            class="icon fa fa-shopping-cart"></span> 购物车</a>
+                </li>
+                {% endif %}
+                {% if authen %}
+                <li>
+                    <div class="portrait"><!-- 头像 -->
+                        <img src="{% static 'img/zcrPortrait.png' %}" alt="晨风睿思头像">
+                    </div>
+                </li>
+                <li><a href="logout.html">退出</a></li>
+                {% else %}
+                <li>
+                    <a href="login.html" class="login">登录 | 注册</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav><!-- 顶部导航条 -->
+
+<!-- 自适应布局 -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- 左侧导航栏 -->
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+                <!-- <li role="presentation" class="active"><a href="#myhome" role="tab" data-toggle="tab"><span class="icon fa fa-home"></span> 我的首页</a></li> -->
+                <li role="presentation" class="active"><a href="#shopping-cart" role="tab" data-toggle="tab"><span
+                        class="icon fa fa-shopping-cart"></span> 购物车</a></li>
+                <li role="presentation"><a href="#profile" role="tab" data-toggle="tab"><span
+                        class="icon fa fa-mortar-board"></span> 个人资料</a></li>
+                <li role="presentation"><a href="#uploadhistory" role="tab" data-toggle="tab"><span
+                        class="icon fa fa-wrench"></span> 上传历史</a></li>
+                <li role="presentation"><a href="#upload" role="tab" data-toggle="tab"><span
+                        class="icon fa fa-cloud-upload"></span> 执行上传</a></li>
+                <li role="presentation"><a href="#myorder" role="tab" data-toggle="tab"><span
+                        class="icon fa fa-bell"></span> 我的订单</a></li>
+                <li role="presentation"><a href="#settings" role="tab" data-toggle="tab"><span
+                        class="icon fa fa-wrench"></span> 设置</a></li>
+                <li role="presentation"><a href="#" role="tab" data-toggle="tab"><span
+                        class="icon fa fa-history"></span> 购书足迹</a></li>
+                <li role="presentation"><a href="#" role="tab" data-toggle="tab"><span
+                        class="icon fa fa-comments"></span> 我的书评</a></li>
+            </ul>
+        </div>
+        <!-- 右侧管理控制台 -->
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="shopping-cart">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">我的购物车</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>书籍封面</th>
+                                    <th>作者</th>
+                                    <th>卖书者</th>
+                                    <th>价格</th>
+                                    <th>类别</th>
+                                    <th>下单</th>
+                                    <th>删除</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for record in shoppingcart %}
+                                <tr>
+
+                                    <td><a href="detail/uuid={{ record.uuid }}"><img
+                                            src="{{ record.bimg }}" alt="sample product"/></a></td>
+                                    <td>{{ record.author }}</td><!-- 作者名字 -->
+                                    <td>{{ record.seller }}</td><!-- 买书人的名字 -->
+                                    <td>{{ record.price }}</td><!-- 价格 -->
+                                    <td>{{ record.bclass }}</td><!-- 类别 -->
+                                    <td>
+                                        <a href="addtoorder/uuid={{ record.uuid }}">确认购买</a>
+                                    </td>
+                                    <td>
+                                        <a href="delshoppingcart/uuid={{record.uuid}}">删除</a>
+                                    </td>
+
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <p class="pull-right"><a class="btn btn-primary" href="#" role="button">查看详细&raquo;</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div>
+                                <img src="{% static 'img/zcrPortrait.png' %}" alt="">
+                            </div>
+                            <br>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">我的资料卡</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p>昵称: {{ user.nickname }}</p>
+                                    <p>学号: {{ user.sno }}</p>
+                                    <p>学院: {{ user.dept }}</p>
+                                    <p>活跃等级: <span class="icon fa fa-star"></span><span
+                                            class="icon fa fa-star"></span><span class="icon fa fa-star-half-o"></span>
+                                    </p>
+                                    <p><span class="icon fa fa-map-marker"></span> 中国</p>
+                                    <p><span class="icon fa fa-clock-o"></span> 2016,July 12</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">我的详细资料</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            姓名: {{ user.nickname }}
+                                        </li>
+                                        <li class="list-group-item">
+                                            学院: {{ user.dept }}
+                                        </li>
+                                        <li class="list-group-item">
+                                            性别: <span class="icon fa fa-male"></span>
+                                        </li>
+                                        <li class="list-group-item">联系方式: {{ user.phone }}</li>
+                                        <li class="list-group-item">累计买书量: {{ user.totalbought }}</li>
+                                        <li class="list-group-item">累计卖书量: {{ user.totalsell }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="upload">
+                    <div class="row">
+                        <div class="col-md-8 upload-form">
+                            <div class="panel panel-default">
+                                <!-- <div class="panel-heading">
+                                    <h3 class="panel-title">编程之美</h3>
+                                </div> -->
+                                <form action="upload.html" enctype="multipart/form-data" method="POST">
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">书名</span>
+                                            <input type="text" class="form-control" name="bname" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">作者</span>
+                                            <input type="text" class="form-control" name="author" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">出版社</span>
+                                            <input type="text" class="form-control" name="publisher" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">售价</span>
+                                            <input type="text" class="form-control" name="price" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">质量</span>
+                                            <input type="text" class="form-control" name="quality" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">类别</span>
+                                            <input type="text" class="form-control" name="bclass" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">简评</span>
+                                            <input type="textarea" class="form-control" name="discp" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-file">浏览</label>
+                                        <input type="file" class="file addimage" name="bimg">
+                                    </div>
+
+                                    <input placeholder="提交" type="submit" class="btn btn-primary" id="uploadsubmit">
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item active">
+                                    <h4 class="list-group-item-heading">近期活跃记录</h4>
+                                    <p class="list-group-item-text">...</p>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading">时间简史</h4>
+                                    <p class="list-group-item-text">霍金</p>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading">C++ Primer</h4>
+                                    <p class="list-group-item-text">...</p>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading">骆驼祥子</h4>
+                                    <p class="list-group-item-text">老舍</p>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading">数据库系统概念（帆船书）</h4>
+                                    <p class="list-group-item-text">...</p>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading">图解TCP/IP</h4>
+                                    <p class="list-group-item-text">...</p>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading">深入理解计算机系统</h4>
+                                    <p class="list-group-item-text">CSAPP</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="uploadhistory">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">我的上传历史</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>书名</th>
+                                    <th>作者</th>
+                                    <th>出版社</th>
+                                    <th>报价</th>
+                                    <th>类别</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for record in uploaded %}
+                                <tr>
+                                    <td>{{ record.bname }}</td>
+                                    <td>{{ record.author }}</td><!-- 作者名字 -->
+                                    <td>{{ record.publisher }}</td><!-- 买书人的名字 -->
+                                    <td>{{ record.price }}</td><!-- 价格 -->
+                                    <td>{{ record.bclass }}</td><!-- 类别 -->
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <p class="pull-right"><a class="btn btn-primary" href="#" role="button">查看详细&raquo;</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="myorder">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">我的订单</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>书名</th>
+                                    <th>作者</th>
+                                    <th>出版社</th>
+                                    <th>卖书人</th>
+                                    <th>报价</th>
+                                    <th>类别</th>
+                                    <th>动作</th>
+                                    <th>动作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for record in order %}
+                                <tr>
+
+                                    <td>{{ record.bname }}</td>
+                                    <td>{{ record.author }}</td><!-- 作者名字 -->
+                                    <td>{{ record.publisher }}</td><!-- 买书人的名字 -->
+                                    <td>{{ record.seller }}</td><!-- 买书人的名字 -->
+                                    <td>{{ record.price }}</td><!-- 价格 -->
+                                    <td>{{ record.bclass }}</td><!-- 类别 -->
+                                    <td>
+                                        {% ifequal record.statu 0 %}
+                                        <a href="makesure/uuid={{ record.uuid }}">确认订单{{recode.statu}}</a>
+                                        {% else %}
+                                        <p>已完成</p>
+                                        {% endifequal %}
+                                    </td>
+                                    <td>
+                                        {% ifequal record.statu 0 %}
+                                        <a href="delbook/uuid={{ record.uuid }}">取消订单</a>
+                                        {% else %}
+                                        <p>{{recode.statu}}</p>
+                                        {% endifequal %}
+                                    </td>
+
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <p class="pull-right"><a class="btn btn-primary" href="#" role="button">查看详细&raquo;</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="overlay">
+    <!-- 空 -->
+</div>
+<div id="overlay-sidebar">
+    <div class="portrait"><!-- 头像 -->
+        <img src="{% static 'img/zcrPortrait.png' %}" alt="晨风睿思头像">
+    </div>
+    <ul>
+        <li><a href=""></span><span class="icon fa fa-mortar-board"></span> 我的资料</a></li>
+        <li><a href=""></span><span class="icon fa fa-shopping-cart"></span> 购物车</a></li>
+        <li><a href=""></span><span class="icon fa fa-bell"></span> 待办事项</a></li>
+        <li><a href=""></span><span class="icon fa fa-history"></span> 购书历史</a></li>
+        <li><a href=""></span><span class="icon fa fa-comments"></span> 我的书评</a></li>
+    </ul>
+</div>
+
+<div class="modal fade" id="aboutModal"><!-- "关于"模态框 -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">关于此交易系统</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    这是我们的数据库大作业&hellip;<br>
+                    没有我们两个人的精诚合作，无法在这么密集的考试下完成这个大作业
+                </p>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">我知道了</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="pleaselogin"><!-- "关于"模态框 -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">请先登录！</h4>
+            </div>
+            <div class="modal-body">
+                <p>转到<a href="login.html">登录页</a></p>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">暂不跳转</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'js/jquery-3.1.0.js' %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/zcrMain.js' %}"></script>
+</body>
+</html>

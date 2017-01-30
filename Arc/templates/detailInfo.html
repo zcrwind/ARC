@@ -1,0 +1,205 @@
+{% load staticfiles %}
+<!-- 书籍详细信息页 -->
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>ARC校园旧书交易系统</title>
+    <link rel="icon" href="{% static '/img/yumaoicon.png' %}">
+
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/__zcrMain.css' %}" rel="stylesheet"><!-- 自定义less文件编译之后生成的css文件 -->
+    <link href="{% static 'css/zcrMain.css' %}" rel="stylesheet"><!-- zcr写CSS的地方 -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="detailInfoPage">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation"><!-- 顶部导航条 -->
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">
+                <img alt="Brand" src="{% static 'img/catlogo.png' %}" width="111px">
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- <a class="navbar-brand" href="index.html">DB Project</a> -->
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html"><span class="icon fa fa-home"></span> 首页</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="icon fa fa-group"></span>
+                        团队
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#feature-tab" data-tab="tab-chrome">Paradox</a></li>
+                        <li><a href="#group">Cherrywind</a></li>
+                    </ul>
+                </li>
+                <li><a href="function.html"><span class="icon fa fa-envira"></span> 功能</a></li>
+                <li><a href="manage.html"><span class="icon fa fa-wrench"></span> 管理</a></li>
+                <li><a href="#aboutModal" data-toggle="modal" data-target="#aboutModal"><span
+                        class="icon fa fa-comments"></span> 关于</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="manage.html#shopping-cart"><span class="icon fa fa-shopping-cart"></span> 购物车</a>
+                </li>
+                <li>
+                    {% if authen %}<!-- 认证 -->
+                    <div class="portrait"><!-- 头像 -->
+                        <img src="{% static 'img/zcrPortrait.png' %}" alt="晨风睿思头像">
+                    </div>
+                    <li><a href="logout.html">退出</a></li>
+                    {% else %}
+
+                    <a href="index.html" class="login">登录 | 注册</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav><!-- 顶部导航条 -->
+
+<main role="main">
+    <div class="container">
+
+        <!-- 面包屑导航 -->
+        <ul class="breadcrumb">
+            <li><a href="index.html">首页</a></li>
+            <li class="active">书籍详细信息</a></li>
+        </ul>
+
+        <div class="bookdetails">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="book">
+                        <img src="{{ thebook.bimg }}" alt="sample book"/>
+                    </div>
+                    <table id="buy-or-add">
+                        <th>
+                            <a href="addtoorder/uuid={{thebook.uuid}}">立即购买 </a>
+                        </th>
+                        <th>
+                            <a href="addtoshoppingcart/uuid={{ thebook.uuid }}">加入购物车 </a>
+                        </th>
+                    </table>
+                </div>
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">《{{ thebook.bname }}》</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    作者: {{ thebook.author }}
+                                </li>
+                                <li class="list-group-item">
+                                    出版社: {{ thebook.publisher }}
+                                </li>
+                                <li class="list-group-item">
+                                    类别: {{ thebook.bclass }}
+                                </li>
+                                <li class="list-group-item">售价: {{ thebook.price }}</li>
+                                <li class="list-group-item">评价:
+                                    {% ifequal thebook.quality 1 %}
+                                    <span class="icon fa fa-star"></span>
+                                    {% endifequal %}
+                                    {% ifequal thebook.quality 2 %}
+                                    <span class="icon fa fa-star"></span>
+                                    <span class="icon fa fa-star"></span>
+                                    {% endifequal %}
+                                    {% ifequal thebook.quality 3 %}
+                                    <span class="icon fa fa-star"></span>
+                                    <span class="icon fa fa-star"></span>
+                                    <span class="icon fa fa-star"></span>
+                                    {% endifequal %}
+                                    {% ifequal thebook.quality 4 %}
+                                    <span class="icon fa fa-star"></span>
+                                    <span class="icon fa fa-star"></span>
+                                    <span class="icon fa fa-star"></span>
+                                    <span class="icon fa fa-star"></span>
+                                    {% endifequal %}
+                                    {% ifequal thebook.quality 5 %}
+                                    <span class="icon fa fa-star"></span>
+                                    <span class="icon fa fa-star"></span>
+                                    <span class="icon fa fa-star"></span>
+                                    <span class="icon fa fa-star"></span>
+                                    <span class="icon fa fa-star"></span>
+                                    {% endifequal %}
+                                </li>
+                                <li class="list-group-item">
+                                    卖书人: {{ thebook.seller }}
+                                </li>
+                                <li class="list-group-item">
+                                    <h4>描述</h4>
+                                    <p>
+                                        {{ thebook.discp }}
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- .container -->
+</main>
+
+<footer role="contentinfo">
+    <ul class="social">
+        <li><a href="#" title="QQ"><span class="icon fa fa-qq"></span></a></li>
+        <li><a href="#" title="微信"><span class="icon fa fa-weixin"></span></a></li>
+        <li><a href="#" title="微博"><span class="icon fa fa-weibo"></span></a></li>
+        <li><a href="#" title="Github"><span class="icon fa fa-github-alt"></span></a></li>
+    </ul>
+    <div class="copy">
+        <p>CopyRight &copy 2016</p>
+        <p>西北工业大学 ARC</p>
+    </div>
+</footer>
+
+<div class="modal fade" id="aboutModal"><!-- "关于"模态框 -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">关于此交易系统</h4>
+            </div>
+            <div class="modal-body">
+                <p>这是我们的数据库大作业&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">我知道了</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'js/jquery-3.1.0.js' %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

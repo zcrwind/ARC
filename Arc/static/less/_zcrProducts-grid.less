@@ -1,0 +1,124 @@
+.pagination-wrap {
+	text-align: center;
+}
+.product-item {
+	padding-bottom: 20px;
+	img {
+		width: 100%;
+		max-height: 280px;
+	}
+	height: 480px;
+	overflow: hidden;
+}
+.grid-options {
+	.panel;
+	.panel-default;// 使侧边栏有Bootstrap的默认panel样式
+	padding-top: 12px;
+	padding-bottom: 24px;
+	max-width: 480px; // responsive adjustment
+	.center-block();
+	> h2 {
+		margin-top: 20px;
+		padding-top: 20xpx;
+		font-size: 1.0 * (@font-size-large);
+		line-height: 1.2;
+		color: @gray-dark;
+	}
+	> h3 {
+		font-size: @font-size-large;
+		line-height: 1.2;
+		margin-top: 12px;
+		color: @gray-dark;
+	}
+	.options-list {
+		.make-row();
+		list-style-type: none;
+		padding-left: 0;
+
+		li {
+			.make-xs-column(6);
+			@media screen and (max-width: @screen-xs-max) {
+				.make-xs-column(4);
+			}
+			a {
+				.btn;
+				//.btn-sm;
+				padding-left: 0;
+				padding-right: 0;
+				color: @gray;
+				&:hover,
+				&:focus,
+				&:active,
+				.active & {
+					color: @link-color;
+				}
+				&:before {
+					// from font-awesome/core.less
+					display: inline-block;
+					font-family: FontAwesome;
+					font-style: normal;
+					font-weight: normal;
+					line-height: 1;
+					-webkit-font-smoothing: antialiased;
+					-moz-osx-font-smoothing: grayscale;
+					// from font-awesome/icons.less
+					content: @fa-var-square-o;
+					// from font-awesome/fixed-width.less
+					width: (18em / 14);
+					text-align: center;
+				}
+				&:hover:before,
+				&:focus:before,
+				&:active:before,
+				.active &:before {
+					// from font-awesome/icons.less
+					content: @fa-var-check-square-o;
+				}
+			}
+		}
+	}
+}
+
+.choose-clearance {
+	// background: #c60004;
+	// background: #efe0ce;
+	// background: #eae77f;
+	background: #073e6f;
+	.center-block();//将该元素显示为块级元素，使用这个Bootstrap的混入将居中
+	width: 100%;//强制其宽度为包含栏的XX%
+	padding-top: 20px;
+	padding-bottom: 12px;
+	white-space: normal;
+	position: relative;
+
+	h3 {
+		font-weight: normal;
+		color: #fff;
+		padding-top: 4px;
+		margin: 6px;
+	}
+	p {
+		color: #fff;
+		line-height: 1.5;
+	}
+	.icon {
+		color: #fff;
+		position: absolute;
+		top: 4px;
+		right:4px;
+	}
+}
+
+.choose-clearance:hover {
+	background: #1367b1;
+}
+
+// Responsive adjustments
+// @media (min-width: @screen-sm-min) {
+//	.options-panel {
+//		display: block;
+//	}
+//	.options-panel-toggle {
+//		display: none;
+//	}
+//}

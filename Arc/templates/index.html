@@ -1,0 +1,295 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>ARC校园旧书交易系统</title>
+    <link rel="icon" href="{% static 'img/yumaoicon.png' %}">
+
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/__zcrMain.css' %}" rel="stylesheet"><!-- 自定义less文件编译之后生成的css文件 -->
+    <link href="{% static 'css/zcrMain.css' %}" rel="stylesheet"><!-- zcr写CSS的地方 -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="homepage">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation"><!-- 顶部导航条 -->
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">
+                <img alt="Brand" src="{% static 'img/catlogo.png' %}" width="111px">
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- <a class="navbar-brand" href="index.html">DB Project</a> -->
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="index.html"><span class="icon fa fa-home"></span> 首页</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="icon fa fa-group"></span>
+                        团队
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#feature-tab" data-tab="tab-chrome">Paradox</a></li>
+                        <li><a href="#group">Cherrywind</a></li>
+                    </ul>
+                </li>
+                <li><a href="function.html"><span class="icon fa fa-envira"></span> 功能</a></li>
+                {% if authen %}
+                <li><a href="manage.html"><span class="icon fa fa-wrench"></span> 管理</a></li>
+                {% endif %}
+                <li><a href="#aboutModal" data-toggle="modal" data-target="#aboutModal"><span
+                        class="icon fa fa-comments"></span> 关于</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if authen %}
+                <li>
+                    <a href="manage.html#shopping-cart"><span class="icon fa fa-shopping-cart"></span> 购物车</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="#pleaselogin" data-toggle="modal" data-target="#pleaselogin"><span
+                            class="icon fa fa-shopping-cart"></span> 购物车</a>
+                </li>
+                {% endif %}
+                {% if authen %}
+                <li>
+                    <div class="portrait"><!-- 头像 -->
+                        <img src="{% static 'img/zcrPortrait.png' %}" alt="晨风睿思头像">
+                    </div>
+                </li>
+                <li><a href="logout.html">退出</a></li>
+                {% else %}
+                <li>
+                    <a href="login.html" class="login">登录 | 注册</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav><!-- 顶部导航条 -->
+
+<main role="main">
+    <div class="container">
+
+        <!-- 面包屑导航 -->
+        <ul class="breadcrumb">
+            <li><a href="index.html">首页</a></li>
+            <li class="active">书籍分类</a></li>
+        </ul>
+
+        <div class="page-header">
+            <h1><span class="icon fa fa-paper-plane"></span> ARC校园旧书交易系统
+                <small> NPUer</small>
+            </h1>
+        </div>
+        <div class="row"><!-- .row -->
+            <div class="grid-options col-sm-3"><!-- 左侧分类栏 -->
+                <!-- <h2 class="clearfix">从下面的分类中选择
+                    <button type="button"
+                    class="options-panel-toggle btn btn-primary pull-right" data-toggle="collapse" data-target="#options-panel">
+                    <span class="icon fa fa-cog fa-2x"></span>
+                    </button>
+                </h2> -->
+                <!-- <div id="options-panel" class="options-panel collapse"> -->
+                <a href="#" class="btn choose-clearance">
+                    <span class="icon fa fa-tag fa-3x"></span>
+                    <h3>ARC On Sale</h3>
+                    <p>我们将思索汇聚指尖<br>与你在云端相遇</p>
+                </a>
+                <h3><span class="icon fa fa-book"></span> 书籍分类</h3>
+                <ul class="options-list options-categories">
+                    <li><a href="#">计算机</a></li>
+                    <li><a href="query/class=编程">编程</a></li>
+                    <li><a href="#">历史</a></li>
+                    <li><a href="#">哲学</a></li>
+                    <li><a href="#">小说</a></li>
+                    <li><a href="#">美学</a></li>
+                    <li><a href="#">诗词</a></li>
+                    <li><a href="#">漫画</a></li>
+                    <li><a href="#">科幻小说</a></li>
+                    <li><a href="#">励志</a></li>
+                    <li><a href="#">经济学</a></li>
+                    <li><a href="#">交互设计</a></li>
+                    <li><a href="#">生活</a></li>
+                </ul>
+                <div class="panel panel-default">
+                    <div class="panel-heading">公告</div>
+                    <div class="panel-body">
+                        书籍是人类进步的阶梯
+                    </div>
+                </div>
+                <h3><span class="icon fa fa-folder-open"></span> 其他分类</h3>
+                <ul class="options-list options-brands">
+                    <li><a href="#">机器学习</a></li>
+                    <li><a href="#">编程</a></li>
+                    <li><a href="#">算法</a></li>
+                    <li><a href="#">Web</a></li>
+                    <li><a href="#">神经网络</a></li>
+                    <li><a href="#">策划</a></li>
+                    <li><a href="#">UI</a></li>
+                    <li><a href="#">云计算</a></li>
+                    <li><a href="#">spark</a></li>
+                    <li><a href="#">大数据</a></li>
+                </ul>
+                <h3><span class="icon fa fa-cloud"></span> 标签云</h3>
+                <ul class="options-list options-other">
+                    <li><a href="#">摄影</a></li>
+                    <li><a href="#">美食</a></li>
+                    <li><a href="#">市场营销</a></li>
+                    <li><a href="#">金融</a></li>
+                    <li><a href="#">医学</a></li>
+                    <li><a href="#">机械制造</a></li>
+                    <li><a href="#">军事</a></li>
+                    <li><a href="#">宗教</a></li>
+                    <li><a href="#">娱乐</a></li>
+                    <li><a href="#">情感</a></li>
+                </ul>
+                <!-- </div> -->
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Database Powered</h3>
+                    </div>
+                    <div class="panel-body">
+                        学好数据库
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        Keep calm,and go to study.
+                    </div>
+                    <div class="panel-footer">希望该系统对大家有所帮助</div>
+                </div>
+            </div><!-- 左侧分类栏 -->
+            <div class="products-grid col-sm-9"><!-- 书籍展示区 -->
+                <div class="row">
+                    {% for book in books %}
+                    <div class="product-item col-xs-6 col-md-4">
+                        <a href="detail/uuid={{ book.uuid }}"><img src="{{book.bimg}}" alt="sample book"/></a>
+                        <h3>
+                            <a href="detail/uuid={{ book.uuid }}">{{ book.bname }}</a>
+                            {% ifequal book.quality 1 %}
+                            <span class="icon fa fa-star"></span>
+                            {% endifequal %}
+                            {% ifequal book.quality 2 %}
+                            <span class="icon fa fa-star"></span>
+                            <span class="icon fa fa-star"></span>
+                            {% endifequal %}
+                            {% ifequal book.quality 3 %}
+                            <span class="icon fa fa-star"></span>
+                            <span class="icon fa fa-star"></span>
+                            <span class="icon fa fa-star"></span>
+                            {% endifequal %}
+                            {% ifequal book.quality 4 %}
+                            <span class="icon fa fa-star"></span>
+                            <span class="icon fa fa-star"></span>
+                            <span class="icon fa fa-star"></span>
+                            <span class="icon fa fa-star"></span>
+                            {% endifequal %}
+                            {% ifequal book.quality 5 %}
+                            <span class="icon fa fa-star"></span>
+                            <span class="icon fa fa-star"></span>
+                            <span class="icon fa fa-star"></span>
+                            <span class="icon fa fa-star"></span>
+                            <span class="icon fa fa-star"></span>
+                            {% endifequal %}
+                        </h3>
+                        <p>
+                            {{ book.discp }}<!-- 图书简介 -->
+                        </p>
+                        <a class="btn btn-primary btn-xs pull-right" href="detail/uuid={{ book.uuid }}">查看详细资料 <i
+                                class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="row pagination-wrap">
+                    <ul class="pagination"><!-- 底部分页导航 -->
+                        <li><a href="#"><span class="fa fa-chevron-left"></span> Prev</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">Next <span class="fa fa-chevron-right"></span></a></li>
+                    </ul>
+                </div>
+            </div><!-- 书籍展示区 -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+</main>
+
+<footer role="contentinfo">
+    <ul class="social">
+        <li><a href="#" title="QQ"><span class="icon fa fa-qq"></span></a></li>
+        <li><a href="#" title="微信"><span class="icon fa fa-weixin"></span></a></li>
+        <li><a href="#" title="微博"><span class="icon fa fa-weibo"></span></a></li>
+        <li><a href="#" title="Github"><span class="icon fa fa-github-alt"></span></a></li>
+    </ul>
+    <div class="copy">
+        <p>CopyRight &copy 2016</p>
+        <p>西北工业大学 ARC</p>
+    </div>
+</footer>
+
+<div class="modal fade" id="aboutModal"><!-- "关于"模态框 -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">关于此交易系统</h4>
+            </div>
+            <div class="modal-body">
+                <p>这是我们的数据库大作业&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">我知道了</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="pleaselogin"><!-- "关于"模态框 -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">请先登录！</h4>
+            </div>
+            <div class="modal-body">
+                <p>转到<a href="login.html">登录页</a></p>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">暂不跳转</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'js/jquery-3.1.0.js' %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
